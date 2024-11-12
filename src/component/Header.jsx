@@ -1,5 +1,6 @@
 import { useState } from "react";
 import menuicon from "../assets/menu.png";
+import { Link } from "react-router-dom";
 import closeicon from "../assets/close.png";
 
 function Header() {
@@ -31,12 +32,12 @@ function Header() {
             >
               <h5>Most Rated</h5>
             </a>
-            <a
+            <Link
               className=" hover:bg-slate-100 p-2 rounded-md  font-semibold "
-              href="/favorites"
+              to="/favorite"
             >
               <h5>Your favorites</h5>
-            </a>
+            </Link>
           </div>
           <div className="md:hidden">
             <img
@@ -74,13 +75,13 @@ function Header() {
             >
               Most rated
             </a>
-            <a
+            <Link
               className="hover:bg-slate-100 py-2 px-3 rounded"
-              href="/favorites"
+              to="/favorite"
               onClick={closeSidebar}
             >
               Your favorite
-            </a>
+            </Link>
           </div>
         </nav>
       )}
