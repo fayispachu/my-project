@@ -26,12 +26,12 @@ function Header() {
             >
               Home
             </a>
-            <a
+            <link
               className=" hover:bg-slate-100 rounded-md font-semibold p-2  "
-              href="rated"
+              to="#rated"
             >
               <h5>Most Rated</h5>
-            </a>
+            </link>
             <Link
               className=" hover:bg-slate-100 p-2 rounded-md  font-semibold "
               to="/favorite"
@@ -68,13 +68,13 @@ function Header() {
             >
               Home
             </a>
-            <a
+            <link
               className="hover:bg-slate-100 py-2 px-3 rounded"
-              href="#rated"
+              to="#rated"
               onClick={closeSidebar}
             >
               Most rated
-            </a>
+            </link>
             <Link
               className="hover:bg-slate-100 py-2 px-3 rounded"
               to="/favorite"
