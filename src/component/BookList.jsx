@@ -38,13 +38,11 @@ function BookList({ searchTerm }) {
   }, []);
 
   useEffect(() => {
-    // Load favorites from local storage on mount
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(savedFavorites);
   }, []);
 
   useEffect(() => {
-    // Save favorites to local storage whenever they change
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
@@ -54,6 +52,9 @@ function BookList({ searchTerm }) {
         book.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredBooks(filtered);
+
+      // Scroll to the search results section
+      cardSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     } else {
       setFilteredBooks(books);
     }
@@ -66,69 +67,20 @@ function BookList({ searchTerm }) {
       setFavorites([...favorites, book]);
     }
   };
-  // for preview
+
   const handleBookClick = (book) => {
     window.scrollTo(0, 0);
     navigate("/preview", { state: { book } });
   };
 
   const mostRatedBooks = books
-    .filter((book) => book.rating >= 4.5) // Adjust the rating threshold as desired
+    .filter((book) => book.rating >= 4.5)
     .sort((a, b) => b.rating - a.rating);
 
   return (
     <div className="bg-[#fff]">
-      <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl">
-        <h1 href="books">
-          {searchTerm ? `Search Results for "${searchTerm}"` : "All Books"}
-        </h1>
-      </div>
-
-      <div className="p-3">
-        {loading && <p>Loading...</p>}
-        {error && <p className="text-red-500">{error}</p>}
-
-        <div
-          ref={cardSectionRef}
-          className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20"
-        >
-          {filteredBooks.map((book) => (
-            <div
-              key={book.id}
-              onClick={() => handleBookClick(book)}
-              className="bg-[#e9edc9] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
-            >
-              <span className="md:pl-60 pl-44 pt-3">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(book);
-                  }}
-                >
-                  <img
-                    src={
-                      favorites.some((fav) => fav.id === book.id)
-                        ? bookmarkIcon
-                        : bookmarkNoIcon
-                    }
-                    alt="Favorite Icon"
-                    className="h-5 w-6"
-                  />
-                </button>
-              </span>
-              <img
-                className="md:h-52 w-52 h-44"
-                src={book.image_url}
-                alt={book.title}
-              />
-              <h2 className="font-bold text-center px-1">{book.title}</h2>
-              <h3 className="text-gray-600">{book.authors}</h3>
-              <p>Rating: {book.rating}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* most rated section */}
+      {/* Conditionally render Most Rated section only if there is no search term */}
+      {!searchTerm && (
         <div className="p-3">
           <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl">
             <h1 id="rated">Most Rated Books</h1>
@@ -170,6 +122,55 @@ function BookList({ searchTerm }) {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Search Results / All Books Section */}
+      <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl">
+        <h1>
+          {searchTerm ? `Search Results for "${searchTerm}"` : "All Books"}
+        </h1>
+      </div>
+
+      <div className="p-3" ref={cardSectionRef}>
+        {loading && <p>Loading...</p>}
+        {error && <p className="text-red-500">{error}</p>}
+
+        <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
+          {filteredBooks.map((book) => (
+            <div
+              key={book.id}
+              onClick={() => handleBookClick(book)}
+              className="bg-[#e9edc9] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
+            >
+              <span className="md:pl-60 pl-44 pt-3">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(book);
+                  }}
+                >
+                  <img
+                    src={
+                      favorites.some((fav) => fav.id === book.id)
+                        ? bookmarkIcon
+                        : bookmarkNoIcon
+                    }
+                    alt="Favorite Icon"
+                    className="h-5 w-6"
+                  />
+                </button>
+              </span>
+              <img
+                className="md:h-52 w-52 h-44"
+                src={book.image_url}
+                alt={book.title}
+              />
+              <h2 className="font-bold text-center px-1">{book.title}</h2>
+              <h3 className="text-gray-600">{book.authors}</h3>
+              <p>Rating: {book.rating}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

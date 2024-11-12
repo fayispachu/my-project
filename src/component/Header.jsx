@@ -26,12 +26,12 @@ function Header() {
             >
               Home
             </a>
-            <Link
+            <a
               className=" hover:bg-slate-100 rounded-md font-semibold p-2  "
-              to="#rated"
+              href="#rated"
             >
               <h5>Most Rated</h5>
-            </Link>
+            </a>
             <Link
               className=" hover:bg-slate-100 p-2 rounded-md  font-semibold "
               to="/favorite"
