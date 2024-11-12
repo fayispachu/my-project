@@ -27,7 +27,7 @@ function Header() {
             </a>
             <a
               className=" hover:bg-slate-100 rounded-md font-semibold p-2  "
-              href="#rated"
+              href="rated"
             >
               <h5>Most Rated</h5>
             </a>

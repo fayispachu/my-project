@@ -12,11 +12,10 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/preview" element={<Preview />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favorite" element={<Favorites />} />
         </Routes>
       </BrowserRouter>
     </>
