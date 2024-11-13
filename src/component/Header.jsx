@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import closeicon from "../assets/close.png";
 
 function Header() {
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
 
   const openSidebar = () => {
-    setSidebarIsOpen(true);
+    setSidebar(true);
   };
   const closeSidebar = () => {
-    setSidebarIsOpen(false);
+    setSidebar(false);
   };
 
   return (
@@ -50,7 +50,7 @@ function Header() {
         </div>
       </header>
 
-      {sidebarIsOpen && (
+      {sidebar && (
         <nav className="fixed top-0 right-0 w-[60%] h-full bg-white text-black z-50 p-5">
           <div className="flex justify-end">
             <img

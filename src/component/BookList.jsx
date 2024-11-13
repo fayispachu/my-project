@@ -24,7 +24,7 @@ function BookList({ searchTerm }) {
           "https://example-data.draftbit.com/books"
         );
         const fetchedBooks = response.data;
-
+        console.log(fetchedBooks);
         setBooks(fetchedBooks);
         setFilteredBooks(fetchedBooks);
       } catch (err) {
