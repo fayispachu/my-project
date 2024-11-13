@@ -78,7 +78,7 @@ function BookList({ searchTerm }) {
     .sort((a, b) => b.rating - a.rating);
 
   return (
-    <div className="bg-[#d8f3dc]">
+    <div className="bg-white">
       {/* Conditionally render Most Rated section only if there is no search term */}
       {!searchTerm && (
         <div className="p-3 ">
@@ -91,7 +91,7 @@ function BookList({ searchTerm }) {
               <div
                 key={book.id}
                 onClick={() => handleBookClick(book)}
-                className="bg-[#ffffff] shadow-lg rounded-lg transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer pt-3"
+                className="bg-white shadow-lg rounded-lg transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer pt-3"
               >
                 <span className="md:pl-60 pl-44   ">
                   <button
@@ -126,7 +126,7 @@ function BookList({ searchTerm }) {
       )}
 
       {/* Search Results / All Books Section */}
-      <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl">
+      <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl ">
         <h1>
           {searchTerm ? `Search Results for "${searchTerm}"` : "All Books"}
         </h1>
@@ -141,7 +141,7 @@ function BookList({ searchTerm }) {
             <div
               key={book.id}
               onClick={() => handleBookClick(book)}
-              className="bg-[#ffffff] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
+              className="bg-white shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
             >
               <span className="md:pl-60 pl-44 pt-3">
                 <button

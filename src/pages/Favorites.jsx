@@ -26,17 +26,17 @@ function Favorites() {
         <p className="font-medium md:text-xl">Go back</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pt-20 pl-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pt-20  pl-5">
         {favorites.length === 0 ? (
           <p className="font-medium">No favorites added yet.</p>
         ) : (
           favorites.map((book) => (
             <div
               key={book.id}
-              className="bg-[#ffffff] shadow-lg rounded-lg md:py-5   transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-1 px-3 w-56 "
+              className="bg-[#ffffff] shadow-lg rounded-lg    transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-1 px-3 w-56 "
             >
               <a
-                className="pl-44 pt-3 pb-2"
+                className="pl-44 pt-3  pb-2"
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();

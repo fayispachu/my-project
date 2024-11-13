@@ -15,7 +15,7 @@ function Header() {
 
   return (
     <>
-      <header className=" bg-[#d8f3dc] w-full text-black md:py-3  px-5">
+      <header className=" bg-white w-full text-black md:py-3  px-5">
         <div className="flex flex-row items-center justify-between md:pl-5 md:pr-5 pl-3 md:pb-0 pb-4 pt-5 md:pt-0">
           <h1 className="font-extrabold text-2xl italic ">Novel Ventures</h1>
           <div className="hidden md:flex flex-row gap-5">
