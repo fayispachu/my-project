@@ -78,7 +78,7 @@ function BookList({ searchTerm }) {
     .sort((a, b) => b.rating - a.rating);
 
   return (
-    <div className="bg-white">
+    <div className="bg-slate-100">
       {/* Conditionally render Most Rated section only if there is no search term */}
       {!searchTerm && (
         <div className="p-3 ">
