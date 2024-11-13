@@ -15,25 +15,27 @@ function Header() {
 
   return (
     <>
-      <header className=" bg-white w-full text-black md:py-3  px-5">
+      <header className=" bg-[#fdf5e6] w-full text-[#441616]  md:py-3  px-5">
         <div className="flex flex-row items-center justify-between md:pl-5 md:pr-5 pl-3 md:pb-0 pb-4 pt-5 md:pt-0">
-          <h1 className="font-extrabold text-2xl italic ">Novel Ventures</h1>
+          <h1 className="font-extrabold text-2xl italic text-[#441616] ">
+            Novel Ventures
+          </h1>
           <div className="hidden md:flex flex-row gap-5">
             <a
-              className="hover:bg-slate-100 rounded-md font-semibold p-2 "
+              className="hover:bg-[#fce6c5] rounded-md font-semibold p-2 "
               href="/"
               onClick={closeSidebar}
             >
               Home
             </a>
             <a
-              className=" hover:bg-slate-100 rounded-md font-semibold p-2  "
+              className=" hover:bg-[#fce6c5] rounded-md font-semibold p-2  "
               href="#rated"
             >
               <h5>Most Rated</h5>
             </a>
             <Link
-              className=" hover:bg-slate-100 p-2 rounded-md  font-semibold "
+              className=" hover:bg-[#fce6c5] p-2 rounded-md  font-semibold "
               to="/favorite"
             >
               <h5>Your favorites</h5>
@@ -62,21 +64,21 @@ function Header() {
           </div>
           <div className="mt-10 flex flex-col justify-end text-end gap-4">
             <a
-              className="hover:bg-slate-100 py-2 px-3 rounded"
+              className="hover:bg-[#fce6c5] py-2 px-3 rounded"
               href="/"
               onClick={closeSidebar}
             >
               Home
             </a>
             <a
-              className="hover:bg-slate-100 py-2 px-3 rounded"
+              className="hover:bg-[#fce6c5] py-2 px-3 rounded"
               href="#rated"
               onClick={closeSidebar}
             >
               Most rated
             </a>
             <Link
-              className="hover:bg-slate-100 py-2 px-3 rounded"
+              className="hover:bg-[#fce6c5] py-2 px-3 rounded"
               to="/favorite"
               onClick={closeSidebar}
             >

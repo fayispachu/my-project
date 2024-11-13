@@ -13,7 +13,7 @@ function Preview() {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-slate-300 pb-5 w-[90%] ">
+      <div className="bg-[#fce6c5] mt-10 pb-5 w-[90%] ">
         <div className="flex flex-row items-center gap-2 pl-3 pt-3">
           <img
             className="w-10 cursor-pointer"

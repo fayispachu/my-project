@@ -20,7 +20,7 @@ function BookHome() {
           <input
             type="text"
             placeholder="Search your book..."
-            className="border border-gray-300 rounded-full p-2 w-[300px] text-center focus:outline-none focus:ring focus:border-blue-300"
+            className="border bg-white  rounded-full p-2 w-[300px] text-center focus:outline-none focus:ring focus:border-blue-300"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm state
           />
