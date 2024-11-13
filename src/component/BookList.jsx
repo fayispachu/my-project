@@ -78,10 +78,10 @@ function BookList({ searchTerm }) {
     .sort((a, b) => b.rating - a.rating);
 
   return (
-    <div className="bg-[#fff]">
+    <div className="bg-[#d8f3dc]">
       {/* Conditionally render Most Rated section only if there is no search term */}
       {!searchTerm && (
-        <div className="p-3">
+        <div className="p-3 ">
           <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl">
             <h1 id="rated">Most Rated Books</h1>
           </div>
@@ -91,9 +91,9 @@ function BookList({ searchTerm }) {
               <div
                 key={book.id}
                 onClick={() => handleBookClick(book)}
-                className="bg-[#e9edc9] shadow-lg rounded-lg transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer"
+                className="bg-[#ffffff] shadow-lg rounded-lg transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer pt-3"
               >
-                <span className="md:pl-60 pl-44 pt-3">
+                <span className="md:pl-60 pl-44   ">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -112,7 +112,7 @@ function BookList({ searchTerm }) {
                   </button>
                 </span>
                 <img
-                  className="md:h-52 w-52 h-44"
+                  className="md:h-52 w-52 h-44 "
                   src={book.image_url}
                   alt={book.title}
                 />
@@ -141,7 +141,7 @@ function BookList({ searchTerm }) {
             <div
               key={book.id}
               onClick={() => handleBookClick(book)}
-              className="bg-[#e9edc9] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
+              className="bg-[#ffffff] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
             >
               <span className="md:pl-60 pl-44 pt-3">
                 <button
