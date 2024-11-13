@@ -53,7 +53,7 @@ function Header() {
       </header>
 
       {sidebar && (
-        <nav className="fixed top-0 right-0 w-[60%] h-full bg-white text-black z-50 p-5 font-semibold">
+        <nav className="fixed top-0 right-0 w-[60%] h-full bg-[#faecd3] text-black z-50 p-5 font-semibold">
           <div className="flex justify-end">
             <img
               className="close-icon w-7 h-7 cursor-pointer"
