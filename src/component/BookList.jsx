@@ -2,8 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import bookmarkIcon from "../assets/bookmark.png"; // Active favorite icon
-import bookmarkNoIcon from "../assets/bookmarkno.png"; // Non-favorite icon
+// Active favorite icon
+import bookmarkIcon from "../assets/bookmark.png";
+import bookmarkNoIcon from "../assets/bookmarkno.png";
 
 function BookList({ searchTerm }) {
   const [books, setBooks] = useState([]);
@@ -53,7 +54,7 @@ function BookList({ searchTerm }) {
       );
       setFilteredBooks(filtered);
 
-      // Scroll to the search results section
+      // Scroll to  search results section
       cardSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     } else {
       setFilteredBooks(books);
@@ -67,7 +68,7 @@ function BookList({ searchTerm }) {
       setFavorites([...favorites, book]);
     }
   };
-
+  // for scroll to top
   const handleBookClick = (book) => {
     window.scrollTo(0, 0);
     navigate("/preview", { state: { book } });
@@ -127,52 +128,54 @@ function BookList({ searchTerm }) {
         </div>
       )}
 
-      {/* Search Results / All Books Section */}
-      <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl ">
-        <h1>
-          {searchTerm ? `Search Results for "${searchTerm}"` : "All Books"}
-        </h1>
-      </div>
+      {/* Search Results all Books Section */}
+      <div className="bg-[#c2bcb1] ">
+        <div className="flex justify-center pt-10 font-serif font-extrabold text-2xl  ">
+          <h1 className="text-[#441616]">
+            {searchTerm ? `Search Results for "${searchTerm}"` : "All Books"}
+          </h1>
+        </div>
 
-      <div className="p-3" ref={cardSectionRef}>
-        {loading && <p>Loading...</p>}
-        {error && <p className="text-red-500">{error}</p>}
+        <div className="p-3" ref={cardSectionRef}>
+          {loading && <p>Loading...</p>}
+          {error && <p className="text-red-500">{error}</p>}
 
-        <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
-          {filteredBooks.map((book) => (
-            <div
-              key={book.id}
-              onClick={() => handleBookClick(book)}
-              className="bg-[#fce6c5] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
-            >
-              <span className="md:pl-60 pl-44 pt-3">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(book);
-                  }}
-                >
-                  <img
-                    src={
-                      favorites.some((fav) => fav.id === book.id)
-                        ? bookmarkIcon
-                        : bookmarkNoIcon
-                    }
-                    alt="Favorite Icon"
-                    className="h-5 w-6"
-                  />
-                </button>
-              </span>
-              <img
-                className="md:h-52 w-52 h-44"
-                src={book.image_url}
-                alt={book.title}
-              />
-              <h2 className="font-bold text-center px-1">{book.title}</h2>
-              <h3 className="text-gray-600">{book.authors}</h3>
-              <p>Rating: {book.rating}</p>
-            </div>
-          ))}
+          <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
+            {filteredBooks.map((book) => (
+              <div
+                key={book.id}
+                onClick={() => handleBookClick(book)}
+                className="bg-[#fce6c5] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
+              >
+                <span className="md:pl-60 pl-44 pt-3">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(book);
+                    }}
+                  >
+                    <img
+                      src={
+                        favorites.some((fav) => fav.id === book.id)
+                          ? bookmarkIcon
+                          : bookmarkNoIcon
+                      }
+                      alt="Favorite Icon"
+                      className="h-5 w-6"
+                    />
+                  </button>
+                </span>
+                <img
+                  className="md:h-52 w-52 h-44"
+                  src={book.image_url}
+                  alt={book.title}
+                />
+                <h2 className="font-bold text-center px-1">{book.title}</h2>
+                <h3 className="text-gray-600">{book.authors}</h3>
+                <p>Rating: {book.rating}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

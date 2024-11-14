@@ -16,7 +16,7 @@ function Favorites() {
   };
 
   return (
-    <div className="bg-[#faecd3] w-screen h-screen">
+    <div className="bbg-[#fdf5e6] w-screen h-screen">
       <div id="favorites" className="p-3  text-center  ">
         <h2 className="font-bold text-2xl">Your Favorites</h2>
 

@@ -26,8 +26,8 @@ function BookHome() {
           />
         </div>
       </div>
-      {/* Pass the searchTerm as a prop to BookList */}
-      <BookList searchTerm={searchTerm} /> {/* Ensure you're passing it here */}
+      {/* Pass the searchTerm prop to BookList */}
+      <BookList searchTerm={searchTerm} />
     </>
   );
 }
