@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 // Active favorite icon
 import bookmarkIcon from "../assets/bookmark.png";
 import bookmarkNoIcon from "../assets/bookmarkno.png";
-
 function BookList({ searchTerm }) {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -88,7 +87,6 @@ function BookList({ searchTerm }) {
               Most Rated Books
             </h1>
           </div>
-
           <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
             {mostRatedBooks.map((book) => (
               <div
