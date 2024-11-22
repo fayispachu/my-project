@@ -22,7 +22,7 @@ function BookList({ searchTerm }) {
       setError("");
 
       try {
-        await delay(5000); // Add a 2-second delay
+        await delay(2000); // Add a 2-second delay
         const response = await axios.get(
           "https://example-data.draftbit.com/books"
         );
