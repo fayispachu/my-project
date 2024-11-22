@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // Active favorite icon
 import bookmarkIcon from "../assets/bookmark.png";
 import bookmarkNoIcon from "../assets/bookmarkno.png";
+
 function BookList({ searchTerm }) {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -13,6 +14,7 @@ function BookList({ searchTerm }) {
   const [favorites, setFavorites] = useState([]);
   const cardSectionRef = useRef(null);
   const navigate = useNavigate();
+  const delay = (ms) => new Promise((reslove) => setTimeout(reslove, ms));
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -20,6 +22,7 @@ function BookList({ searchTerm }) {
       setError("");
 
       try {
+        await delay(5000); // Add a 2-second delay
         const response = await axios.get(
           "https://example-data.draftbit.com/books"
         );
@@ -28,7 +31,7 @@ function BookList({ searchTerm }) {
         setBooks(fetchedBooks);
         setFilteredBooks(fetchedBooks);
       } catch (err) {
-        setError("Failed to fetch books. ", err);
+        setError("Failed to fetch books. ", err, error);
       } finally {
         setLoading(false);
       }
@@ -77,6 +80,28 @@ function BookList({ searchTerm }) {
     .filter((book) => book.rating >= 4.5)
     .sort((a, b) => b.rating - a.rating);
 
+  // Skelton loader
+  const SkeletonLoader = () => {
+    return (
+      <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
+        {Array(8)
+          .fill(0)
+          .map((_, index) => (
+            <div
+              key={index}
+              className="bg-gray-300 animate-pulse shadow-lg rounded-lg items-center flex flex-col cursor-pointer py-3"
+            >
+              <div className="h-5 w-6 bg-gray-400 rounded mb-3 ml-56"></div>
+              <div className="h-44 w-52 bg-gray-400 rounded-md"></div>
+              <div className="h-6 w-3/4 bg-gray-400 rounded mt-4"></div>
+              <div className="h-5 w-1/2 bg-gray-400 rounded mt-2"></div>
+              <div className="h-4 w-1/4 bg-gray-400 rounded mt-2"></div>
+            </div>
+          ))}
+      </div>
+    );
+  };
+
   return (
     <div className="bg-[#fdf5e6]">
       {/* Conditionally render Most Rated section only if there is no search term */}
@@ -87,42 +112,46 @@ function BookList({ searchTerm }) {
               Most Rated Books
             </h1>
           </div>
-          <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
-            {mostRatedBooks.map((book) => (
-              <div
-                key={book.id}
-                onClick={() => handleBookClick(book)}
-                className="bg-[#fce6c5] shadow-lg rounded-lg transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer pt-3"
-              >
-                <span className="md:pl-60 pl-44   ">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleFavorite(book);
-                    }}
-                  >
-                    <img
-                      src={
-                        favorites.some((fav) => fav.id === book.id)
-                          ? bookmarkIcon
-                          : bookmarkNoIcon
-                      }
-                      alt="Favorite Icon"
-                      className="h-5 w-6"
-                    />
-                  </button>
-                </span>
-                <img
-                  className="md:h-52 w-52 h-44 "
-                  src={book.image_url}
-                  alt={book.title}
-                />
-                <h2 className="font-bold text-center px-1">{book.title}</h2>
-                <h3 className="text-gray-600">{book.authors}</h3>
-                <p>Rating: {book.rating}</p>
-              </div>
-            ))}
-          </div>
+          {loading ? (
+            <SkeletonLoader />
+          ) : (
+            <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
+              {mostRatedBooks.map((book) => (
+                <div
+                  key={book.id}
+                  onClick={() => handleBookClick(book)}
+                  className="bg-[#fce6c5] shadow-lg rounded-lg transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer pt-3"
+                >
+                  <span className="md:pl-60 pl-44   ">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(book);
+                      }}
+                    >
+                      <img
+                        src={
+                          favorites.some((fav) => fav.id === book.id)
+                            ? bookmarkIcon
+                            : bookmarkNoIcon
+                        }
+                        alt="Favorite Icon"
+                        className="h-5 w-6"
+                      />
+                    </button>
+                  </span>
+                  <img
+                    className="md:h-52 w-52 h-44 "
+                    src={book.image_url}
+                    alt={book.title}
+                  />
+                  <h2 className="font-bold text-center px-1">{book.title}</h2>
+                  <h3 className="text-gray-600">{book.authors}</h3>
+                  <p>Rating: {book.rating}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -135,45 +164,46 @@ function BookList({ searchTerm }) {
         </div>
 
         <div className="p-3" ref={cardSectionRef}>
-          {loading && <p>Loading...</p>}
-          {error && <p className="text-red-500">{error}</p>}
-
-          <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
-            {filteredBooks.map((book) => (
-              <div
-                key={book.id}
-                onClick={() => handleBookClick(book)}
-                className="bg-[#fce6c5] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
-              >
-                <span className="md:pl-60 pl-44 pt-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleFavorite(book);
-                    }}
-                  >
-                    <img
-                      src={
-                        favorites.some((fav) => fav.id === book.id)
-                          ? bookmarkIcon
-                          : bookmarkNoIcon
-                      }
-                      alt="Favorite Icon"
-                      className="h-5 w-6"
-                    />
-                  </button>
-                </span>
-                <img
-                  className="md:h-52 w-52 h-44"
-                  src={book.image_url}
-                  alt={book.title}
-                />
-                <h2 className="font-bold text-center px-1">{book.title}</h2>
-                <h3 className="text-gray-600">{book.authors}</h3>
-                <p>Rating: {book.rating}</p>
-              </div>
-            ))}
-          </div>
+          {loading ? (
+            <SkeletonLoader />
+          ) : (
+            <div className="grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-20">
+              {filteredBooks.map((book) => (
+                <div
+                  key={book.id}
+                  onClick={() => handleBookClick(book)}
+                  className="bg-[#fce6c5] shadow-lg rounded-lg md:py-2 transform hover:scale-105 transition-transform items-center flex flex-col cursor-pointer md:px-0 px-3"
+                >
+                  <span className="md:pl-60 pl-44 pt-3">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(book);
+                      }}
+                    >
+                      <img
+                        src={
+                          favorites.some((fav) => fav.id === book.id)
+                            ? bookmarkIcon
+                            : bookmarkNoIcon
+                        }
+                        alt="Favorite Icon"
+                        className="h-5 w-6"
+                      />
+                    </button>
+                  </span>
+                  <img
+                    className="md:h-52 w-52 h-44"
+                    src={book.image_url}
+                    alt={book.title}
+                  />
+                  <h2 className="font-bold text-center px-1">{book.title}</h2>
+                  <h3 className="text-gray-600">{book.authors}</h3>
+                  <p>Rating: {book.rating}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
