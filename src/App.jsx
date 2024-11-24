@@ -7,9 +7,14 @@ import Home from "./pages/Home";
 import Header from "./component/Header";
 import Favorites from "./pages/Favorites";
 
+// import CardSkeleton from "./component/CardSkeleton";
+// import BookList from "./component/BookList";
 function App() {
   return (
     <>
+      {/* <CardSkeleton>
+        <BookList />
+      </CardSkeleton> */}
       <BrowserRouter>
         <Header />
         <Routes>
